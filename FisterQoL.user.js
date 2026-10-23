@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Fister QoL — Browser
 // @namespace    fister-qol.local
-// @version      2.1.0
-// @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day theme and a desktop buddy, all in the game's Settings.
+// @version      2.2.0
+// @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day theme, a desktop buddy and Bad Translator, all in the game's Settings.
 // @match        https://fister.fun/*
 // @match        https://www.fister.fun/*
 // @exclude      https://fister.fun/assets/*
@@ -14,6 +14,7 @@
 // @grant        GM_xmlhttpRequest
 // @connect      raw.githubusercontent.com
 // @connect      githubusercontent.com
+// @connect      translate.googleapis.com
 // @updateURL    https://raw.githubusercontent.com/jaxonb423/fisterqol/main/FisterQoL.user.js
 // @downloadURL  https://raw.githubusercontent.com/jaxonb423/fisterqol/main/FisterQoL.user.js
 // @noframes
@@ -27,9 +28,18 @@ if(pageUrl.pathname!=='/')return;
 if(pageUrl.searchParams.get('qol')==='off'){pageUrl.searchParams.delete('qol');history.replaceState(history.state,'',pageUrl.href);}
 if(window.__fisterQolBrowserLoading||window.__fisterRuntimeLoaded)return;
 window.__fisterQolBrowserLoading=true;
+// Bad Translator (QoL > Fun) reaches Google Translate through Tampermonkey, which the game page can't do itself.
+// Only https://translate.googleapis.com is allowed through this bridge.
+if(typeof GM_xmlhttpRequest==='function'&&!window.__fisterQolHttpGet){
+ const qolHttpGet=(url,timeout)=>new Promise((resolve,reject)=>{let u;try{u=new URL(String(url));}catch{reject(Error('Bad URL'));return;}
+  if(u.protocol!=='https:'||u.hostname!=='translate.googleapis.com'){reject(Error('Only Google Translate is allowed'));return;}
+  GM_xmlhttpRequest({method:'GET',url:u.href,timeout:Math.min(60000,Number(timeout)||20000),anonymous:true,
+   onload:r=>resolve({status:r.status,text:String(r.responseText||'')}),onerror:()=>resolve({status:0,text:'network error'}),ontimeout:()=>resolve({status:0,text:'timeout'})});});
+ try{Object.defineProperty(window,'__fisterQolHttpGet',{value:qolHttpGet,configurable:false,writable:false});}catch{}
+}
 // The heavy parts (QoL runtime, JS parser, Bisty) live in a bundle on GitHub so this script stays small
 // and Tampermonkey can inject it before the game starts. Downloaded once, checked against this fingerprint, then cached.
-const QOL_BUNDLE={version:"2.1.0",sha256:"b767316282afc22d106420be8d13a4e980d10f5909a0ab94daa45a23093f6b85",url:"https://raw.githubusercontent.com/jaxonb423/fisterqol/main/dist/fisterqol-bundle-2.1.0-b767316282.json"};
+const QOL_BUNDLE={version:"2.2.0",sha256:"99403dc005fa50a079432b5ecdf2a677ec72c1c1e65754a2d53f26b19895fc1d",url:"https://raw.githubusercontent.com/jaxonb423/fisterqol/main/dist/fisterqol-bundle-2.2.0-99403dc005.json"};
 let RUNTIME='',IMG='';
 function qolBundleDb(){return new Promise((res,rej)=>{const r=indexedDB.open('fister-qol-bundle',1);r.onupgradeneeded=()=>r.result.createObjectStore('b');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
 async function qolBundleIdb(mode,fn){const db=await qolBundleDb();try{return await new Promise((res,rej)=>{const tx=db.transaction('b',mode),q=fn(tx.objectStore('b'));tx.oncomplete=()=>res(q&&q.result);tx.onerror=()=>rej(tx.error);});}finally{db.close();}}

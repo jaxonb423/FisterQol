@@ -1,6 +1,6 @@
 # FisterQoL
 
-A quality-of-life mod for [Fister](https://fister.fun): HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the **Track Day** built-in theme and a **desktop buddy** (Bisty by default, or your own image). Everything lives in the game's Settings under the **QoL** tab.
+A quality-of-life mod for [Fister](https://fister.fun): HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the **Track Day** built-in theme, a **desktop buddy** (Bisty by default, or your own image) and **Bad Translator**. Everything lives in the game's Settings under the **QoL** tab.
 
 ## Install (browser)
 
@@ -10,6 +10,15 @@ A quality-of-life mod for [Fister](https://fister.fun): HUD, crosshair, camera, 
 4. Open fister.fun. The first launch downloads the QoL runtime once (about 1.2 MB); later launches use the saved copy.
 
 Tampermonkey checks this repo for updates automatically.
+
+## Bad Translator
+
+QoL → Fun → **Bad Translator** sends every piece of text in the game through Google Translate in random languages (up to 1000), then back to English. Translations are saved on your device, so each text only makes the trip once. **Ctrl+Shift+F10** turns it on or off from anywhere.
+
+- The first time you turn it on, Tampermonkey asks to let FisterQoL connect to `translate.googleapis.com`. Choose **Always allow** (or **Always allow domain**).
+- At 1000 languages a screen's first pass takes several minutes, because each batch of text needs one request per language. Google sometimes asks it to slow down; it waits and carries on by itself.
+- Timers and other constantly changing text are left alone, and so is anything you type.
+- Browser only: the Steam app doesn't allow requests to Google Translate.
 
 ## How it's split
 
