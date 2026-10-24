@@ -31,6 +31,18 @@ The clip editor shows **TikTok** and **Wide** buttons when a clip comes in both 
 - Captions, voices, music, Download and Share all use the version you picked.
 - Turn it off with *Add TikTok / Wide buttons in the clip editor* in the same place.
 
+## The QoL tab in the clip editor
+
+Open a clip in the clip editor and pick the **QoL** tab next to Cut / Text / Sound.
+
+- **Thumbnail:** scrub to a frame and press *Use this frame*; it shows on the clip's card (on this device).
+- **TikTok framing:** on the TikTok version of a wide clip, press *Edit framing* and drag the box left or right at different moments. The crop glides between the points so it follows the action.
+- **Stickers:** emoji or your own picture (PNG, JPG, GIF, WebP). Drag to move, scroll to resize, set when it starts and ends.
+- **QoL overlays:** with Settings → General → Clips → *QoL overlays are* set to **Editable in the clip editor** (the default), QoL records the input display, timer, FPS, crosshair and music player next to each clip instead of burning them into the video. In the editor you can drag, resize, hide or re-time them. They start where your QoL clip layout puts them. Clips the game posts to Discord by itself don't have them; Download or Share from the editor to include them. Needs Chrome or Edge.
+- **Slow-mo, speed-up and instant replay:** mark the moments, then *Make a new clip with these*. Because the length changes, it's saved as a new clip (marked *QoL edit*) in your Clips list, on this device. Cuts, shape, framing, stickers and overlays carry over; add captions and sounds to the new clip.
+
+Download, Share and the editor's export use the finished version with your stickers and overlays. The first time, QoL plays the clip through once to make it.
+
 ## Themes in the Clips window
 
 Track Day, the three-colour gradient, and the Midnight and Neon Arcade templates in Theme Creator style the Clips list and the clip editor, including the game's newer window style. Themes you made from an unchanged Midnight, Neon Arcade or Track Day template are upgraded automatically; themes you've edited are left as they are.
