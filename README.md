@@ -27,7 +27,7 @@ The clip editor shows **TikTok** and **Wide** buttons when a clip comes in both 
 - The first time you pick the missing version, QoL plays the clip through once to make it, so it takes as long as the clip (about 30 seconds). A progress bar covers the preview while it works. Keep the tab open.
 - After that it's saved on your device and opens straight away. Saved versions are cleared after 8 days (the game keeps clips for 7), or with **Forget made versions**.
 - **TikTok from a wide clip:** crops the middle to fill the screen (default), or shows the whole screen with blurred bars. Change it under Settings → General → Clips → *TikTok version of wide clips*.
-- **Wide from a tall clip:** cuts away the blurred bars, so you get the full screen back.
+- **Wide from a tall clip:** cuts away the blurred bars (and the game's "fister.fun" line under the picture), so you get the full screen back.
 - Captions, voices, music, Download and Share all use the version you picked.
 - Turn it off with *Add TikTok / Wide buttons in the clip editor* in the same place.
 
@@ -37,8 +37,10 @@ Open a clip in the clip editor and pick the **QoL** tab next to Cut / Text / Sou
 
 - **Thumbnail:** scrub to a frame and press *Use this frame*; it shows on the clip's card (on this device).
 - **TikTok framing:** on the TikTok version of a wide clip, press *Edit framing* and drag the box left or right at different moments. The crop glides between the points so it follows the action.
-- **Stickers:** emoji or your own picture (PNG, JPG, GIF, WebP). Drag to move, scroll to resize, set when it starts and ends.
+- **Stickers:** any FisterQoL emoji or Fister emote (searchable), or your own picture (PNG, JPG, GIF, WebP). Drag to move, scroll to resize, set when it starts and ends.
 - **QoL overlays:** with Settings → General → Clips → *QoL overlays are* set to **Editable in the clip editor** (the default), QoL records the input display, timer, FPS, crosshair and music player next to each clip instead of burning them into the video. In the editor you can drag, resize, hide or re-time them. They start where your QoL clip layout puts them. Clips the game posts to Discord by itself don't have them; Download or Share from the editor to include them. Needs Chrome or Edge.
+- **Fight moments:** while you play, QoL notes your KOs, parries, air kicks and hits. In the editor they show on a **Fights** lane under the timeline (click one to jump there), with **‹ KO / KO ›** buttons and a list. One click adds **Replay every KO**, **Slow-mo every KO** or **Replay every parry**. Works on clips saved with 2.3.2 or newer.
+- **Instant replay presets:** *Quick* (1 s at half speed), *Classic* (2 s at half speed, zoomed in a little) and *Dramatic* (3 s at quarter speed, zoomed in), ending just after the playhead.
 - **Slow-mo, speed-up and instant replay:** mark the moments, then *Make a new clip with these*. Because the length changes, it's saved as a new clip (marked *QoL edit*) in your Clips list, on this device. Cuts, shape, framing, stickers and overlays carry over; add captions and sounds to the new clip.
 
 Download, Share and the editor's export use the finished version with your stickers and overlays. The first time, QoL plays the clip through once to make it.

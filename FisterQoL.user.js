@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Fister QoL — Browser
 // @namespace    fister-qol.local
-// @version      2.3.1
+// @version      2.3.2
 // @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day theme, a desktop buddy, Bad Translator and a clip editor QoL tab, all in the game's Settings.
 // @match        https://fister.fun/*
 // @match        https://www.fister.fun/*
@@ -39,7 +39,7 @@ if(typeof GM_xmlhttpRequest==='function'&&!window.__fisterQolHttpGet){
 }
 // The heavy parts (QoL runtime, JS parser, Bisty) live in a bundle on GitHub so this script stays small
 // and Tampermonkey can inject it before the game starts. Downloaded once, checked against this fingerprint, then cached.
-const QOL_BUNDLE={version:"2.3.0",sha256:"5136a4ca21bffe4067dffca5fdd4914312b9a309743f11b43e47b8310b6a6ffa",url:"https://raw.githubusercontent.com/jaxonb423/fisterqol/main/dist/fisterqol-bundle-2.3.0-5136a4ca21.json"};
+const QOL_BUNDLE={version:"2.3.2",sha256:"59c196b258ec568d359047549bb9838dc92530334f2ef0cc7f4c8aa396651111",url:"https://raw.githubusercontent.com/jaxonb423/fisterqol/main/dist/fisterqol-bundle-2.3.2-59c196b258.json"};
 let RUNTIME='',IMG='';
 function qolBundleDb(){return new Promise((res,rej)=>{const r=indexedDB.open('fister-qol-bundle',1);r.onupgradeneeded=()=>r.result.createObjectStore('b');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
 async function qolBundleIdb(mode,fn){const db=await qolBundleDb();try{return await new Promise((res,rej)=>{const tx=db.transaction('b',mode),q=fn(tx.objectStore('b'));tx.oncomplete=()=>res(q&&q.result);tx.onerror=()=>rej(tx.error);});}finally{db.close();}}
@@ -160,6 +160,10 @@ function patchMain(raw,url){
  if(mode&&clip){
   optEdit('clip overlays',s=>once(s,'let a=e.start(n,i);','let a=e.start(fisterClipOverlays.recordingCanvas(n,'+mode+'),i);'));
   optEdit('clip overlays',s=>once(s,'e?.recording&&e.captureRenderedFrame()','e?.recording&&(e.canvas=fisterClipOverlays.recordingCanvas('+clip+','+mode+',e.activeProfile,e),e.captureRenderedFrame())'));}
+ // Fight markers: let QoL hear the same combat events the game plays sounds for (parries, air kicks, punches, KOs).
+ optEdit('fight markers',s=>{const i=s.indexOf('.onParrySuccess(');if(i<0)throw Error('fight');const f=s.lastIndexOf('function ',i);
+  const m=s.slice(f,i).match(/^function [\w$]+\(([\w$]+),[\w$]+,[\w$]+\)\{/);if(!m||s.slice(i-m[1].length,i)!==m[1])throw Error('fight');
+  return s.slice(0,f+m[0].length)+'try{fisterClipStudio.fight.watch('+m[1]+');}catch{}'+s.slice(f+m[0].length);});
  const tabs=[['qol','QoL']].map(([id,title])=>call+'('+tabMatch[1]+',{dataTab:"settings-'+id+'",id:"settings-'+id+'-tab",title:'+JSON.stringify(title)+'})');
  source=once(source,tabMatch[0],tabMatch[0]+','+tabs.join(','));
  source=once(source,call+'('+panel+',{})',["FisterQolHub",panel].map(p=>call+'('+p+',{})').join(','));
