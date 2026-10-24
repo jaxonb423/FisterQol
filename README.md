@@ -1,6 +1,6 @@
 # FisterQoL
 
-A quality-of-life mod for [Fister](https://fister.fun): HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the **Track Day**, **macOS style** and **Notebook Club** built-in themes, a **desktop buddy** (Bisty by default, or your own image) and **Bad Translator**. Everything lives in the game's Settings under the **QoL** tab.
+A quality-of-life mod for [Fister](https://fister.fun): HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the **Track Day**, **macOS style** and **Notebook Club** and **Pixel Quest** built-in themes, a **desktop buddy** (Bisty by default, or your own image) and **Bad Translator**. Everything lives in the game's Settings under the **QoL** tab.
 
 ## Install (browser)
 
@@ -53,6 +53,8 @@ Settings → QoL → Customization → **Built-in theme**:
 - **macOS style (light / dark):** frosted translucent windows, centred titles with red, yellow and green buttons on the left, the system font, a blue accent, segmented-control tabs and dark HUD-style QoL overlays. Inspired by the Mac look; no Apple logos or artwork.
 
 - **Notebook Club (Sunny / Candy / Lavender / Emerald):** cosy visual-novel-menu style: notebook-paper windows with soft polka dots, ribbon title bars, rounded pastel buttons, name-tag section headers and dialogue-box notifications. Sunny is coral, Candy is pink, Lavender is purple with bookish serif headings, Emerald is green.
+
+- **Pixel Quest:** retro RPG menus: black boxes with thick white pixel borders, a blocky monospace font, yellow for whatever is selected with a little arrow cursor, chunky segmented gauges and boxed-text notifications.
 
 All of them are also templates in Theme Creator, so you can copy one and tweak it.
 

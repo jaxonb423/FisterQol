@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Fister QoL — Browser
 // @namespace    fister-qol.local
-// @version      2.3.4
-// @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day, macOS-style and Notebook Club themes, a desktop buddy, Bad Translator and a clip editor QoL tab, all in the game's Settings.
+// @version      2.3.5
+// @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day, macOS-style, Notebook Club and Pixel Quest themes, a desktop buddy, Bad Translator and a clip editor QoL tab, all in the game's Settings.
 // @match        https://fister.fun/*
 // @match        https://www.fister.fun/*
 // @exclude      https://fister.fun/assets/*
@@ -39,7 +39,7 @@ if(typeof GM_xmlhttpRequest==='function'&&!window.__fisterQolHttpGet){
 }
 // The heavy parts (QoL runtime, JS parser, Bisty) live in a bundle on GitHub so this script stays small
 // and Tampermonkey can inject it before the game starts. Downloaded once, checked against this fingerprint, then cached.
-const QOL_BUNDLE={version:"2.3.4",sha256:"1f855a4bb187891d80757a8cf8aa8be616a560f6823356e29cb3da89f60b40dd",url:"https://raw.githubusercontent.com/jaxonb423/fisterqol/main/dist/fisterqol-bundle-2.3.4-1f855a4bb1.json"};
+const QOL_BUNDLE={version:"2.3.5",sha256:"ca6a48bfeb186d6c87dea6d01ea8870ed038f17b877624fc5430cae803340c6c",url:"https://raw.githubusercontent.com/jaxonb423/fisterqol/main/dist/fisterqol-bundle-2.3.5-ca6a48bfeb.json"};
 let RUNTIME='',IMG='';
 function qolBundleDb(){return new Promise((res,rej)=>{const r=indexedDB.open('fister-qol-bundle',1);r.onupgradeneeded=()=>r.result.createObjectStore('b');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
 async function qolBundleIdb(mode,fn){const db=await qolBundleDb();try{return await new Promise((res,rej)=>{const tx=db.transaction('b',mode),q=fn(tx.objectStore('b'));tx.oncomplete=()=>res(q&&q.result);tx.onerror=()=>rej(tx.error);});}finally{db.close();}}
