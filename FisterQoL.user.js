@@ -2,7 +2,7 @@
 // @name         Fister QoL — Browser
 // @namespace    fister-qol.local
 // @author       jaxonb423
-// @version      2.3.9
+// @version      2.3.10
 // @description  The all-in-one Fister quality-of-life pack: HUD, crosshair, clips, themes and much more, all in the QoL tab.
 // @match        https://fister.fun/*
 // @match        https://www.fister.fun/*
@@ -22,7 +22,7 @@
 // @fister-id    fisterqol
 // @fister-tags  qol hud themes clips
 // @fister-icon  https://raw.githubusercontent.com/jaxonb423/fister-plugin-manager/main/plugins/art/fisterqol-icon.png
-// @fister-banner https://raw.githubusercontent.com/jaxonb423/fister-plugin-manager/main/plugins/art/fisterqol-banner-2.png
+// @fister-banner https://raw.githubusercontent.com/jaxonb423/fister-plugin-manager/main/plugins/art/fisterqol-banner-3.gif
 // ==/UserScript==
 (function(){
 'use strict';
