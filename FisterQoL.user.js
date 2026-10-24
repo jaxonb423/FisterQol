@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Fister QoL — Browser
 // @namespace    fister-qol.local
-// @version      2.2.0
-// @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day theme, a desktop buddy and Bad Translator, all in the game's Settings.
+// @version      2.2.1
+// @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day theme, a desktop buddy, Bad Translator and TikTok / Wide clip versions, all in the game's Settings.
 // @match        https://fister.fun/*
 // @match        https://www.fister.fun/*
 // @exclude      https://fister.fun/assets/*
@@ -39,7 +39,7 @@ if(typeof GM_xmlhttpRequest==='function'&&!window.__fisterQolHttpGet){
 }
 // The heavy parts (QoL runtime, JS parser, Bisty) live in a bundle on GitHub so this script stays small
 // and Tampermonkey can inject it before the game starts. Downloaded once, checked against this fingerprint, then cached.
-const QOL_BUNDLE={version:"2.2.0",sha256:"99403dc005fa50a079432b5ecdf2a677ec72c1c1e65754a2d53f26b19895fc1d",url:"https://raw.githubusercontent.com/jaxonb423/fisterqol/main/dist/fisterqol-bundle-2.2.0-99403dc005.json"};
+const QOL_BUNDLE={version:"2.2.1",sha256:"89852b5722cc06949affe99e08fdcdd02774b298a6753be6c25213315b42e888",url:"https://raw.githubusercontent.com/jaxonb423/fisterqol/main/dist/fisterqol-bundle-2.2.1-89852b5722.json"};
 let RUNTIME='',IMG='';
 function qolBundleDb(){return new Promise((res,rej)=>{const r=indexedDB.open('fister-qol-bundle',1);r.onupgradeneeded=()=>r.result.createObjectStore('b');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
 async function qolBundleIdb(mode,fn){const db=await qolBundleDb();try{return await new Promise((res,rej)=>{const tx=db.transaction('b',mode),q=fn(tx.objectStore('b'));tx.oncomplete=()=>res(q&&q.result);tx.onerror=()=>rej(tx.error);});}finally{db.close();}}
@@ -140,6 +140,11 @@ function patchMain(raw,url){
  const imported=new Set(imports.flatMap(i=>Object.values(i.names)));
  const input=opt('input display',()=>{const found=new Set();
    for(const m of source.matchAll(/([\w$]+)=([\w$]+)\(\),[\w$]+=[\w$]+\(\),([\w$]+)=null/g))if(imported.has(m[2]))found.add(m[3]);
+   // Newer builds have more than one store with that shape; keep the one the game fills with `new InputManager(...)`.
+   if(found.size>1){const cls=source.match(/\{InputManager:([\w$]+)[,}]/)?.[1];
+    const made=cls?[...source.matchAll(new RegExp('([\\w$]+)=new '+regexName(cls)+'\\(','g'))].map(m=>m[1]):[];
+    const kept=[...found].filter(name=>made.some(v=>new RegExp('[,;({]'+regexName(name)+'='+regexName(v)+'[,;)]').test(source)));
+    found.clear();for(const name of kept)found.add(name);}
    if(found.size!==1)throw Error('input manager');return [...found][0];});
  const pacer=opt('uncapped FPS counter',()=>binding(source,/([\w$]+)=class\{constructor\(e=0\)\{[^}]*`displayFrameMs`/,'frame pacer'));
  const scene=opt('game scene features',()=>binding(source,/([\w$]+)\.getCanvas\(\)/,'scene'));

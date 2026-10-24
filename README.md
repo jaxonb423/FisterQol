@@ -20,6 +20,21 @@ QoL → Fun → **Bad Translator** sends every piece of text in the game through
 - Timers and other constantly changing text are left alone, and so is anything you type.
 - Browser only: the Steam app doesn't allow requests to Google Translate.
 
+## TikTok / Wide clip versions
+
+The clip editor shows **TikTok** and **Wide** buttons when a clip comes in both shapes. When the game only gives you one, FisterQoL adds the button for the other, in the editor and on the clip cards in the Clips list.
+
+- The first time you pick the missing version, QoL plays the clip through once to make it, so it takes as long as the clip (about 30 seconds). A progress bar covers the preview while it works. Keep the tab open.
+- After that it's saved on your device and opens straight away. Saved versions are cleared after 8 days (the game keeps clips for 7), or with **Forget made versions**.
+- **TikTok from a wide clip:** crops the middle to fill the screen (default), or shows the whole screen with blurred bars. Change it under Settings → General → Clips → *TikTok version of wide clips*.
+- **Wide from a tall clip:** cuts away the blurred bars, so you get the full screen back.
+- Captions, voices, music, Download and Share all use the version you picked.
+- Turn it off with *Add TikTok / Wide buttons in the clip editor* in the same place.
+
+## Themes in the Clips window
+
+Track Day, the three-colour gradient, and the Midnight and Neon Arcade templates in Theme Creator style the Clips list and the clip editor, including the game's newer window style. Themes you made from an unchanged Midnight, Neon Arcade or Track Day template are upgraded automatically; themes you've edited are left as they are.
+
 ## How it's split
 
 | File | What it is |
