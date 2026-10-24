@@ -62,6 +62,10 @@ All of them are also templates in Theme Creator, so you can copy one and tweak i
 
 Track Day, the three-colour gradient, and the Midnight and Neon Arcade templates in Theme Creator style the Clips list and the clip editor, including the game's newer window style. Themes you made from an unchanged Midnight, Neon Arcade or Track Day template are upgraded automatically; themes you've edited are left as they are.
 
+## Plugins
+
+FisterQoL works with [Fister Plugin Manager](https://github.com/jaxonb423/fister-plugins), a separate userscript for installing community plugins. With both installed, QoL loads the game and adds the Plugin Manager's hooks too (QoL 2.3.6 or newer); the Plugins tab sits next to the QoL tab.
+
 ## How it's split
 
 | File | What it is |

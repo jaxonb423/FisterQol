@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Fister QoL — Browser
 // @namespace    fister-qol.local
-// @version      2.3.5
+// @version      2.3.6
 // @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day, macOS-style, Notebook Club and Pixel Quest themes, a desktop buddy, Bad Translator and a clip editor QoL tab, all in the game's Settings.
 // @match        https://fister.fun/*
 // @match        https://www.fister.fun/*
@@ -182,6 +182,8 @@ function patchMain(raw,url){
  // Lazily loaded windows (Clips, the store...) still bring their own stylesheet, so add those, waiting at most 4 s.
  optEdit('faster module loading',s=>{const preload=binding(s,/([\w$]+)\(\(\)=>import\(/,'module preload helper');
   if(!imports.find(i=>i.names.t===preload))throw Error('preload');s=once(s,'t as '+preload+'}','t as __fisterUnusedPreload}');return 'var '+preload+'=(factory,deps)=>{const have=new Set([...document.querySelectorAll("link[rel=stylesheet]")].map(l=>l.href));'+'const css=(Array.isArray(deps)?deps:[]).filter(d=>/\\.css(?:[?#]|$)/.test(d)).map(d=>new URL(d,location.origin+"/").href).filter(h=>!have.has(h));'+'return Promise.all(css.map(h=>new Promise(r=>{const l=document.createElement("link");l.rel="stylesheet";l.href=h;l.onload=l.onerror=()=>r();document.head.appendChild(l);setTimeout(r,4000);}))).then(()=>factory());};\n'+s;});
+ // Other userscripts (for example Fister Plugin Manager) add their own hooks to the game here, after QoL's.
+ for(const hook of (Array.isArray(window.__fisterPatchHooks)?window.__fisterPatchHooks:[])){try{const next=hook.patch(source);if(typeof next==='string')source=next;}catch(error){skipped.push(String(hook.name||hook.id||'another script\'s hooks'));console.warn('[Fister QoL] A patch hook failed:',hook.id,error);}}
  const threeHome=imports.find(i=>texture&&Object.values(i.names).includes(texture))||imports[0];
  const unique=[...new Set(skipped)];
  const bridge='var __fisterNative={'+Object.entries(native).map(([key,value])=>'get '+key+'(){return '+value+';}').join(',')+',get threeUrl(){return '+JSON.stringify(threeHome?new URL(threeHome.path,url).href:'')+';}'+',get moduleUrls(){return '+JSON.stringify([...new Set(imports.map(i=>new URL(i.path,url).href))])+';}'+',get skipped(){return '+JSON.stringify(unique)+';}'+'};\n';
@@ -256,7 +258,7 @@ async function loadNativeRuntime(){
  const entryUrl=new URL(entry.src,location.href).href;
  const entrySource=await getText(entryUrl);
  const info=bootstrapInfo(entrySource,entryUrl);
- let patched=null,fromCache=false;const cacheKey=QOL_CACHE_VER+'|'+info.mainUrl;
+ let patched=null,fromCache=false;const hookSig=(Array.isArray(window.__fisterPatchHooks)?window.__fisterPatchHooks:[]).map(h=>String(h.id)+'@'+String(h.version)).join(',');const cacheKey=QOL_CACHE_VER+'|'+hookSig+'|'+info.mainUrl;
  try{const hit=await qolCacheGet(cacheKey);if(hit&&typeof hit.source==='string'){patched=hit.source;fromCache=true;window.__fisterQolSkipped=hit.skipped||[];}}catch{}
  if(!patched)try{patched=patchMain(await getText(info.mainUrl),info.mainUrl);qolCachePut(cacheKey,{source:patched,skipped:window.__fisterQolSkipped||[],at:Date.now()}).catch(()=>{});}
  catch(error){
