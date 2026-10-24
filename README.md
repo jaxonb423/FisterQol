@@ -1,6 +1,6 @@
 # FisterQoL
 
-A quality-of-life mod for [Fister](https://fister.fun): HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the **Track Day** built-in theme, a **desktop buddy** (Bisty by default, or your own image) and **Bad Translator**. Everything lives in the game's Settings under the **QoL** tab.
+A quality-of-life mod for [Fister](https://fister.fun): HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the **Track Day** and **macOS style** built-in themes, a **desktop buddy** (Bisty by default, or your own image) and **Bad Translator**. Everything lives in the game's Settings under the **QoL** tab.
 
 ## Install (browser)
 
@@ -44,6 +44,15 @@ Open a clip in the clip editor and pick the **QoL** tab next to Cut / Text / Sou
 - **Slow-mo, speed-up and instant replay:** mark the moments, then *Make a new clip with these*. Because the length changes, it's saved as a new clip (marked *QoL edit*) in your Clips list, on this device. Cuts, shape, framing, stickers and overlays carry over; add captions and sounds to the new clip.
 
 Download, Share and the editor's export use the finished version with your stickers and overlays. The first time, QoL plays the clip through once to make it.
+
+## Built-in themes
+
+Settings → QoL → Customization → **Built-in theme**:
+
+- **Track Day:** bright racing-menu style: green header bars, white cards, chunky green buttons.
+- **macOS style (light / dark):** frosted translucent windows, centred titles with red, yellow and green buttons on the left, the system font, a blue accent, segmented-control tabs and dark HUD-style QoL overlays. Inspired by the Mac look; no Apple logos or artwork.
+
+Both are also templates in Theme Creator, so you can copy one and tweak it.
 
 ## Themes in the Clips window
 
