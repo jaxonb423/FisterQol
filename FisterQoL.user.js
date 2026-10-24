@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Fister QoL — Browser
 // @namespace    fister-qol.local
-// @version      2.3.0
+// @version      2.3.1
 // @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day theme, a desktop buddy, Bad Translator and a clip editor QoL tab, all in the game's Settings.
 // @match        https://fister.fun/*
 // @match        https://www.fister.fun/*
@@ -174,10 +174,10 @@ function patchMain(raw,url){
   return s.replace(/onGameStart:(?:([\w$]+)|\(\))=>\{/g,match=>match+'fisterRoundMessage.start();');});
  for(const re of [/([\w$]+)\(c,l,\{fontWeight:"bold"\}\)/,/className="singleplayer-board-player",r\.innerHTML=([\w$]+)\(e\.username,/])
   optEdit('staff tags',s=>{const name=binding(s,re,'staff names');return s.replace(new RegExp('(?<![\\w$])'+regexName(name)+'\\(','g'),'fisterQol.staffName('+name+',');});
- // Use direct dynamic imports: the page already installs the runtime CSS.
- // Vite's separate preload graph can hang on obsolete or stalled CSS after deploys.
+ // Use direct dynamic imports instead of Vite's preload graph, which can hang on obsolete or stalled files after deploys.
+ // Lazily loaded windows (Clips, the store...) still bring their own stylesheet, so add those, waiting at most 4 s.
  optEdit('faster module loading',s=>{const preload=binding(s,/([\w$]+)\(\(\)=>import\(/,'module preload helper');
-  if(!imports.find(i=>i.names.t===preload))throw Error('preload');s=once(s,'t as '+preload+'}','t as __fisterUnusedPreload}');return 'var '+preload+'=(factory)=>Promise.resolve().then(factory);\n'+s;});
+  if(!imports.find(i=>i.names.t===preload))throw Error('preload');s=once(s,'t as '+preload+'}','t as __fisterUnusedPreload}');return 'var '+preload+'=(factory,deps)=>{const have=new Set([...document.querySelectorAll("link[rel=stylesheet]")].map(l=>l.href));'+'const css=(Array.isArray(deps)?deps:[]).filter(d=>/\\.css(?:[?#]|$)/.test(d)).map(d=>new URL(d,location.origin+"/").href).filter(h=>!have.has(h));'+'return Promise.all(css.map(h=>new Promise(r=>{const l=document.createElement("link");l.rel="stylesheet";l.href=h;l.onload=l.onerror=()=>r();document.head.appendChild(l);setTimeout(r,4000);}))).then(()=>factory());};\n'+s;});
  const threeHome=imports.find(i=>texture&&Object.values(i.names).includes(texture))||imports[0];
  const unique=[...new Set(skipped)];
  const bridge='var __fisterNative={'+Object.entries(native).map(([key,value])=>'get '+key+'(){return '+value+';}').join(',')+',get threeUrl(){return '+JSON.stringify(threeHome?new URL(threeHome.path,url).href:'')+';}'+',get moduleUrls(){return '+JSON.stringify([...new Set(imports.map(i=>new URL(i.path,url).href))])+';}'+',get skipped(){return '+JSON.stringify(unique)+';}'+'};\n';
