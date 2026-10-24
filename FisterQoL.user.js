@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name         Fister QoL — Browser
 // @namespace    fister-qol.local
-// @version      2.3.6
+// @author       jaxonb423
+// @version      2.3.7
 // @description  Quality-of-life mod for Fister: HUD, crosshair, camera, audio, performance, clips, music, outfits, pets, custom themes, the Track Day, macOS-style, Notebook Club and Pixel Quest themes, a desktop buddy, Bad Translator and a clip editor QoL tab, all in the game's Settings.
 // @match        https://fister.fun/*
 // @match        https://www.fister.fun/*
@@ -18,6 +19,10 @@
 // @updateURL    https://raw.githubusercontent.com/jaxonb423/fisterqol/main/FisterQoL.user.js
 // @downloadURL  https://raw.githubusercontent.com/jaxonb423/fisterqol/main/FisterQoL.user.js
 // @noframes
+// @fister-id    fisterqol
+// @fister-tags  qol hud themes clips
+// @fister-icon  https://raw.githubusercontent.com/jaxonb423/fister-plugin-manager/main/plugins/art/fisterqol-icon.svg
+// @fister-banner https://raw.githubusercontent.com/jaxonb423/fister-plugin-manager/main/plugins/art/fisterqol-banner.svg
 // ==/UserScript==
 (function(){
 'use strict';

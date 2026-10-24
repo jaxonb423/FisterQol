@@ -66,6 +66,8 @@ Track Day, the three-colour gradient, and the Midnight and Neon Arcade templates
 
 FisterQoL works with [Fister Plugin Manager](https://github.com/jaxonb423/fister-plugin-manager), a separate userscript for installing community plugins. With both installed, QoL loads the game and adds the Plugin Manager's hooks too (QoL 2.3.6 or newer); the Plugins tab sits next to the QoL tab.
 
+You can also install FisterQoL itself from the Plugin Manager instead of Tampermonkey: + Add plugin → Browse the catalog → **Fister QoL — Browser**, then reload the game. Use one or the other, not both.
+
 ## How it's split
 
 | File | What it is |
